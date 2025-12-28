@@ -27,12 +27,14 @@ function App() {
       <div className="bg-[#eeeeee] p-2 min-h-[calc(100vh-2rem)] sm:min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] flex flex-col relative">
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <main className="flex-grow p-4 sm:p-6 md:p-8 pt-8">
-          {currentPage === Page.Visualizer ? (
-            <HomePage />
-          ) : (
-            <ContactPage />
-          )}
-        </main>
+  {(currentPage === Page.Visualizer ||
+    currentPage === Page.Profiler ||
+    currentPage === Page.Lens ||
+    currentPage === Page.Imagine) && <HomePage />}
+
+  {currentPage === Page.Contact && <ContactPage />}
+</main>
+
         <footer className="py-2 text-[9px] uppercase tracking-[0.2em] text-center opacity-50">
           Urban Masque Media • {new Date().getFullYear()} • Connection Established
         </footer>
