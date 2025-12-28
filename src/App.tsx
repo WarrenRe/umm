@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="min-h-screen text-gray-900 p-4 sm:p-6 md:p-8 animate-fadeIn bg-white selection:bg-black selection:text-white">
-      <div className="bg-[#eeeeee] p-2 shadow-[8px_8px_0px_#000000] min-h-[calc(100vh-2rem)] sm:min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] flex flex-col relative">
+      <div className="bg-[#eeeeee] p-2 min-h-[calc(100vh-2rem)] sm:min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] flex flex-col relative">
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
         <main className="flex-grow p-4 sm:p-6 md:p-8 pt-8">
           {currentPage === Page.Visualizer ? (

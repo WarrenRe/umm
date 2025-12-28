@@ -15,7 +15,7 @@ export default function HomePage() {
     return (
       <div className="w-full space-y-6">
         {items.map((src, i) => (
-          <div key={i} className="border-2 border-black bg-white">
+          <div key={i} className="bg-white">
             <img src={src} alt={`slide-${i}`} className="w-full h-auto block" />
           </div>
         ))}
@@ -26,7 +26,7 @@ export default function HomePage() {
   // DESKTOP/TABLET: carousel (1 visible)
   return (
     <div className="w-full">
-      <div className="relative border-2 border-black bg-white overflow-hidden">
+      <div className="relative bg-white overflow-hidden">
         <div className="w-full aspect-[16/9] max-h-[70vh]">
           <div
             className="h-full flex transition-transform duration-300 ease-out"
