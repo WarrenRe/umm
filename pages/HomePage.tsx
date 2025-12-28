@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { comicImage, stuffImage, image22 } from '../assets/images';
+import { comicImage, stuffImage, image22 } from '../assets/images.ts';
 
 const HomePage: React.FC = () => {
   return (

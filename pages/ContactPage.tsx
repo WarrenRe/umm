@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ummLogo } from '../assets/images';
+import { ummLogo } from '../assets/images.ts';
 
 const ContactPage: React.FC = () => {
   return (

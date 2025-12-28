@@ -1,10 +1,10 @@
 
 import React, { useState } from 'react';
-import { Page } from './types';
-import Header from './components/Header';
-import HomePage from './pages/HomePage';
-import ContactPage from './pages/ContactPage';
-import InitializationScreen from './components/InitializationScreen';
+import { Page } from './types.ts';
+import Header from './components/Header.tsx';
+import HomePage from './pages/HomePage.tsx';
+import ContactPage from './pages/ContactPage.tsx';
+import InitializationScreen from './components/InitializationScreen.tsx';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Home);

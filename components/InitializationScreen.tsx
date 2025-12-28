@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { glitchImage } from '../assets/images';
+import { glitchImage } from '../assets/images.ts';
 
 interface InitializationScreenProps {
   onComplete: () => void;
