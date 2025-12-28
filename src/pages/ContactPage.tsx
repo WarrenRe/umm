@@ -1,39 +1,53 @@
+import { ummLogo } from "../assets/images"; // or: import { logo as ummLogo } from "../assets/images";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
-import React from 'react';
-import { ummLogo } from '../assets/images';
+export default function ContactPage() {
+  const isDesktopOrTablet = useMediaQuery("(min-width: 768px)");
 
-const ContactPage: React.FC = () => {
-  return (
-    <div className="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 h-full text-gray-800 animate-fadeIn">
-      <div className="w-full max-w-xs md:w-1/3">
-        <img 
-          src={ummLogo} 
-          alt="Urban Masque Media Logo" 
-          className="w-full h-auto object-contain"
-          style={{ clipPath: 'inset(3px 0 0 0)' }}
-        />
-      </div>
-      <div className="max-w-md text-left md:w-2/3">
-        <h2 className="text-2xl md:text-3xl font-bold mb-3 tracking-wide">
-          Contact Me.
-        </h2>
-        <p className="mb-3 text-gray-700 text-sm md:text-base leading-relaxed">
-          Got an idea? A collab in mind? Something half-formed but interesting? This is the place. I work across art, sound, narrative, and emerging tech. 
-        </p>
-        <p className="mb-4 text-gray-700 text-sm md:text-base leading-relaxed">
-          Some projects are polished, some are weird, all are intentional. If you’re reaching out with curiosity, support, or an opportunity, I’m listening.
-        </p>
-        <a 
-          href="https://instagram.com/urbanmasque.tv" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="inline-block font-semibold text-black hover:text-gray-600 transition-colors duration-200 border-b-2 border-black hover:border-gray-600 pb-1 text-sm md:text-base"
-        >
-          instagram.com/urbanmasque.tv
-        </a>
+  const text = (
+    <div className="border-2 border-black bg-white p-6">
+      <h1 className="text-xl uppercase tracking-[0.2em] mb-4">Hit me up.</h1>
+      <p className="leading-relaxed">
+        Got an idea? A collab in mind? Something half-formed but interesting?
+        <br />
+        This is the place. I work across art, sound, narrative, and emerging tech.
+        <br />
+        Some projects are polished, some are weird, all are intentional.
+        If you’re reaching out with curiosity, support, or an opportunity, I’m listening.
+      </p>
+
+      <div className="mt-6 uppercase tracking-[0.2em] text-sm">
+        instagram
       </div>
     </div>
   );
-};
 
-export default ContactPage;
+  // MOBILE: stacked, still fits width, scroll allowed if needed
+  if (!isDesktopOrTablet) {
+    return (
+      <div className="w-full space-y-6">
+        <div className="border-2 border-black bg-white p-4">
+          <img src={ummLogo} alt="UMM" className="w-full h-auto block" />
+        </div>
+        {text}
+      </div>
+    );
+  }
+
+  // DESKTOP/TABLET: split, no scroll, image left / text right
+  return (
+    <div className="w-full">
+      <div className="grid grid-cols-2 gap-6 items-center">
+        <div className="border-2 border-black bg-white p-6 flex justify-start">
+          <img
+            src={ummLogo}
+            alt="UMM"
+            className="h-[220px] w-auto object-contain"
+          />
+        </div>
+
+        <div className="flex justify-end">{text}</div>
+      </div>
+    </div>
+  );
+}
