@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { images as imageUrls } from "../assets/images";
+import { images as imageUrls } from "../assets/images"; // after you add export const images = [...]
 
 export default function HomePage() {
   const slides = useMemo(() => imageUrls, []);
@@ -9,8 +9,8 @@ export default function HomePage() {
   const next = () => setIdx((i) => (i + 1) % slides.length);
 
   return (
-    <div className="w-full">
-      {/* Mobile: stacked */}
+    <div className="mx-auto w-full max-w-6xl px-4 py-8">
+      {/* MOBILE: stacked */}
       <div className="md:hidden space-y-6">
         {slides.map((src, i) => (
           <div key={i} className="border-2 border-black bg-white">
@@ -19,7 +19,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      {/* Desktop/tablet: carousel */}
+      {/* TABLET/DESKTOP: carousel */}
       <div className="hidden md:block">
         <div className="relative border-2 border-black bg-white overflow-hidden">
           <div
@@ -36,8 +36,8 @@ export default function HomePage() {
           <button
             type="button"
             onClick={prev}
+            aria-label="Previous slide"
             className="absolute left-3 top-1/2 -translate-y-1/2 border-2 border-black bg-white px-3 py-2 hover:bg-black hover:text-white"
-            aria-label="Previous"
           >
             ‹
           </button>
@@ -45,8 +45,8 @@ export default function HomePage() {
           <button
             type="button"
             onClick={next}
+            aria-label="Next slide"
             className="absolute right-3 top-1/2 -translate-y-1/2 border-2 border-black bg-white px-3 py-2 hover:bg-black hover:text-white"
-            aria-label="Next"
           >
             ›
           </button>
