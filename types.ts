@@ -1,5 +1,5 @@
 
 export enum Page {
-  Home = 'Home',
-  Contact = 'Contact',
+  Visualizer = 'Visualizer',
+  ContactMe = 'Contact Me',
 }

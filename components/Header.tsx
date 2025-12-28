@@ -7,6 +7,14 @@ interface HeaderProps {
   setCurrentPage: (page: Page) => void;
 }
 
+const menuItems = [
+  { name: 'Visualizer', type: 'external', url: 'https://warrenre.github.io/Visualizer/' },
+  { name: 'Profiler', type: 'external', url: 'https://warrenre.github.io/dogwatch/' },
+  { name: 'Lens', type: 'external', url: 'https://www.tiktok.com/t/ZTHKnpT219VwK-q3GRd/' },
+  { name: 'Imagine', type: 'external', url: 'https://www.midjourney.com/@urbz_?tab=spotlight' },
+  { name: Page.ContactMe, type: 'internal', page: Page.ContactMe },
+];
+
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -15,8 +23,12 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavigation = (page: Page) => {
-    setCurrentPage(page);
+  const handleItemClick = (item: typeof menuItems[0]) => {
+    if (item.type === 'external' && item.url) {
+      window.open(item.url, '_blank', 'noopener,noreferrer');
+    } else if (item.type === 'internal' && item.page) {
+      setCurrentPage(item.page);
+    }
     setIsMenuOpen(false);
   };
 
@@ -33,14 +45,12 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     };
   }, []);
 
-  const navLink = currentPage === Page.Home ? Page.Contact : Page.Home;
-
   return (
-    <header className="p-2 sm:p-3 flex justify-between items-center relative">
+    <header className="p-2 sm:p-3 flex justify-between items-center relative border-b-2 border-black">
       <div ref={menuRef}>
         <button
           onClick={toggleMenu}
-          className="p-2 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-pink-500"
+          className="p-2 focus:outline-none"
           aria-label="Toggle menu"
         >
           <svg
@@ -48,67 +58,35 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <defs>
-              <linearGradient id="menuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f07167" />
-                <stop offset="50%" stopColor="#8f2d56" />
-                <stop offset="100%" stopColor="#203040" />
-              </linearGradient>
-            </defs>
             <path
-              stroke="url(#menuGradient)"
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M4 6h16M4 12h16m-7 6h7"
+              d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
         </button>
         {isMenuOpen && (
-          <div className="absolute top-full left-2 sm:left-3 mt-2 w-48 bg-[#F0F0F0]/95 backdrop-blur-sm border border-gray-200 rounded-md shadow-lg z-10">
-            <a
-              href="https://warrenre.github.io/Visualizer/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-pink-500 hover:text-white transition-colors duration-200"
-            >
-              Visualizer
-            </a>
-            <a
-              href="https://warrenre.github.io/dogwatch/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-pink-500 hover:text-white transition-colors duration-200"
-            >
-              Profiler
-            </a>
-            <a
-              href="https://www.tiktok.com/t/ZTHKnpT219VwK-q3GRd/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-pink-500 hover:text-white transition-colors duration-200"
-            >
-              Lens
-            </a>
-            <a
-              href="https://www.midjourney.com/@urbz_?tab=spotlight"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-pink-500 hover:text-white transition-colors duration-200"
-            >
-              Imagine
-            </a>
-            <button
-              onClick={() => handleNavigation(navLink)}
-              className="block w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-pink-500 hover:text-white transition-colors duration-200"
-            >
-              {navLink === Page.Contact ? 'Contact Me' : 'Home'}
-            </button>
+          <div className="absolute top-full left-0 mt-2 w-48 bg-[#f5f5f5] border-2 border-black shadow-[4px_4px_0px_#000000] z-10">
+            {menuItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => handleItemClick(item)}
+                className={`block w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${
+                  currentPage === item.name && item.type === 'internal'
+                    ? 'bg-black text-white'
+                    : 'text-gray-800 hover:bg-black hover:text-white'
+                }`}
+              >
+                {item.name}
+              </button>
+            ))}
           </div>
         )}
       </div>
-      <h1 className="text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-br from-[#f07167] via-[#8f2d56] to-[#203040]">
+      <h1 className="text-2xl font-bold tracking-wider">
         UMM
       </h1>
     </header>
