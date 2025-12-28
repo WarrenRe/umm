@@ -1,26 +1,12 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Page } from './types';
 import Header from './components/Header';
 import VisualizerPage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
-import InitializationScreen from './components/InitializationScreen';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [isExitingInit, setIsExitingInit] = useState(false);
-
-  const handleInitComplete = () => {
-    setIsExitingInit(true);
-    setTimeout(() => {
-      setIsInitialized(true);
-    }, 700); // Match this to the glitch animation duration
-  };
-
-  if (!isInitialized) {
-    return <InitializationScreen onComplete={handleInitComplete} isExiting={isExitingInit} />;
-  }
 
   const renderPage = () => {
     switch (currentPage) {
