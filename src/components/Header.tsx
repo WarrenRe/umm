@@ -10,8 +10,8 @@ export default function Header({
   const isHome = currentPage === Page.Visualizer;
 
   return (
-    <header className="border-b-2 border-black bg-[#f3f3f3]">
-      <div className="flex items-center justify-between px-3 py-2">
+    <header className="bg-[#f3f3f3]">
+      <div className="flex items-center justify-between px-4 py-2">
         <div className="text-[10px] uppercase tracking-[0.2em] opacity-70">Menu</div>
 
         <nav className="flex gap-2">
@@ -34,7 +34,7 @@ export default function Header({
           </button>
         </nav>
 
-        <div className="font-bold tracking-[0.35em]">UMM</div>
+        <div className="font-bold tracking-[0.45em] text-[16px] md:text-[18px]">UMM</div>
       </div>
     </header>
   );

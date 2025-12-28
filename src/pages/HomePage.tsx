@@ -47,7 +47,7 @@ export default function HomePage() {
         <button
           type="button"
           onClick={prev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 border-2 border-black bg-white px-4 py-3 text-xl hover:bg-black hover:text-white"
+          className="absolute left-2 top-1/2 -translate-y-1/2 border-2 border-black bg-white px-4 py-3 text-2xl hover:bg-black hover:text-white"
           aria-label="Previous"
         >
           ‹
@@ -56,7 +56,7 @@ export default function HomePage() {
         <button
           type="button"
           onClick={next}
-          className="absolute right-4 top-1/2 -translate-y-1/2 border-2 border-black bg-white px-4 py-3 text-xl hover:bg-black hover:text-white"
+          className="absolute right-2 top-1/2 -translate-y-1/2 border-2 border-black bg-white px-4 py-3 text-2xl hover:bg-black hover:text-white"
           aria-label="Next"
         >
           ›
