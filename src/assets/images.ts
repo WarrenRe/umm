@@ -4,8 +4,11 @@ export const stuffImage = `https://rawcdn.githack.com/WarrenRe/Model/5fae801fa95
 export const image22 = `https://rawcdn.githack.com/WarrenRe/Model/5fae801fa9512e42aa935224cd9bab77b169e352/image22.png`;
 // FIX: Add missing glitchImage export to resolve import error.
 export const glitchImage = `https://rawcdn.githack.com/s-macke/Interlace/master/glitch.gif`;
-export const images = [
+
+export const logo = ummLogo;
+
+export const slides = [
   comicImage,
-  ummLogo,
   stuffImage,
+  image22,
 ];

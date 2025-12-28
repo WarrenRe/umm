@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
-import { images as imageUrls } from "../assets/images";
+import { slides } from "../assets/images";
 
 export default function HomePage() {
-  const slides = useMemo(() => imageUrls, []);
+  const items = useMemo(() => slides, []);
   const [idx, setIdx] = useState(0);
 
   const prev = () => setIdx((i) => (i - 1 + slides.length) % slides.length);
