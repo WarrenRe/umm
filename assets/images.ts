@@ -2,5 +2,5 @@ export const comicImage = `https://rawcdn.githack.com/WarrenRe/Model/339fc8a316e
 export const ummLogo = `https://rawcdn.githack.com/WarrenRe/Model/339fc8a316ec86f8e1ff7ab24be8686943b71737/umm.png`;
 export const stuffImage = `https://rawcdn.githack.com/WarrenRe/Model/5fae801fa9512e42aa935224cd9bab77b169e352/stuff.jpg`;
 export const image22 = `https://rawcdn.githack.com/WarrenRe/Model/5fae801fa9512e42aa935224cd9bab77b169e352/image22.png`;
-// FIX: Add missing export for glitchImage used in InitializationScreen.tsx
-export const glitchImage = `https://rawcdn.githack.com/WarrenRe/Model/5fae801fa9512e42aa935224cd9bab77b169e352/Glitch.png`;
+// FIX: Add missing glitchImage export to resolve import error.
+export const glitchImage = `https://rawcdn.githack.com/s-macke/Interlace/master/glitch.gif`;

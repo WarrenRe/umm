@@ -4,7 +4,6 @@ import { Page } from './types';
 import Header from './components/Header';
 import VisualizerPage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
-import StuffPage from './pages/StuffPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
@@ -15,8 +14,6 @@ function App() {
         return <VisualizerPage />;
       case Page.ContactMe:
         return <ContactPage />;
-      case Page.Stuff:
-        return <StuffPage />;
       default:
         return <VisualizerPage />;
     }
@@ -26,7 +23,7 @@ function App() {
     <div className="min-h-screen text-gray-900 p-4 sm:p-6 md:p-8 animate-fadeIn">
       <div className="bg-[#eeeeee] border-2 border-black p-2 shadow-[8px_8px_0px_#000000] min-h-[calc(100vh-2rem)] sm:min-h-[calc(100vh-3rem)] md:min-h-[calc(100vh-4rem)] flex flex-col">
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        <main className="flex-grow p-4 sm:p-6 md:p-8">
+        <main className="flex-grow p-4 sm:p-6 md:p-8 flex items-center justify-center">
           {renderPage()}
         </main>
       </div>
