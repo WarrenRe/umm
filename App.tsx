@@ -4,6 +4,7 @@ import { Page } from './types';
 import Header from './components/Header';
 import VisualizerPage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
+import StuffPage from './pages/StuffPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
@@ -14,6 +15,8 @@ function App() {
         return <VisualizerPage />;
       case Page.ContactMe:
         return <ContactPage />;
+      case Page.Stuff:
+        return <StuffPage />;
       default:
         return <VisualizerPage />;
     }

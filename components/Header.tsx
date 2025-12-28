@@ -12,6 +12,7 @@ const menuItems = [
   { name: 'Profiler', type: 'external', url: 'https://warrenre.github.io/dogwatch/' },
   { name: 'Lens', type: 'external', url: 'https://www.tiktok.com/t/ZTHKnpT219VwK-q3GRd/' },
   { name: 'Imagine', type: 'external', url: 'https://www.midjourney.com/@urbz_?tab=spotlight' },
+  { name: Page.Stuff, type: 'internal', page: Page.Stuff },
   { name: Page.ContactMe, type: 'internal', page: Page.ContactMe },
 ];
 
