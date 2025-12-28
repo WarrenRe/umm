@@ -10,6 +10,7 @@ const ContactPage: React.FC = () => {
           src={ummLogo} 
           alt="Urban Masque Media Logo" 
           className="w-full h-auto object-contain"
+          style={{ clipPath: 'inset(3px 0 0 0)' }}
         />
       </div>
       <div className="max-w-md text-left md:w-2/3">

@@ -31,6 +31,16 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
     }
     setIsMenuOpen(false);
   };
+  
+  const handleHomeNavigation = () => {
+    setCurrentPage(Page.Visualizer);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      handleHomeNavigation();
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -57,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
             fill="none"
-            viewBox="0 0 24 24"
+            viewBox="0 a 0 24 24"
             stroke="currentColor"
           >
             <path
@@ -69,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
           </svg>
         </button>
         {isMenuOpen && (
-          <div className="absolute top-full left-0 mt-2 w-48 bg-[#f5f5f5] border-2 border-black shadow-[4px_4px_0px_#000000] z-10">
+          <div className="absolute top-full left-0 mt-2 w-48 bg-[#eeeeee] border-2 border-black shadow-[4px_4px_0px_#000000] z-10">
             {menuItems.map((item) => (
               <button
                 key={item.name}
@@ -86,9 +96,18 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage }) => {
           </div>
         )}
       </div>
-      <h1 className="text-2xl font-bold tracking-wider">
-        UMM
-      </h1>
+      <div 
+        onClick={handleHomeNavigation}
+        onKeyDown={handleKeyDown}
+        role="button"
+        tabIndex={0}
+        aria-label="Go to homepage"
+        className="cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
+      >
+        <h1 className="text-2xl font-bold tracking-wider">
+          UMM
+        </h1>
+      </div>
     </header>
   );
 };
