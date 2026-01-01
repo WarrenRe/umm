@@ -35,54 +35,40 @@ export default function HomePage({ resetKey = 0 }: Props) {
   return (
     <div className="w-full">
       <div className="mx-auto w-full max-w-5xl">
-        <div className="relative">
-          {/* Slide frame */}
-          <div className="border-2 border-black bg-white overflow-hidden">
-            <div
-              className="flex transition-transform duration-300 ease-out"
-              style={{ transform: `translateX(-${idx * 100}%)` }}
-            >
-              {items.map((src, i) => (
-                <div key={i} className="w-full shrink-0">
-                  <img
-                    src={src}
-                    alt={`slide-${i}`}
-                    className="w-full h-auto block"
-                  />
-                </div>
-              ))}
-            </div>
+        <div className="relative border-2 border-black bg-white overflow-hidden">
+          {/* Slide track */}
+          <div
+            className="flex transition-transform duration-300 ease-out"
+            style={{ transform: `translateX(-${idx * 100}%)` }}
+          >
+            {items.map((src, i) => (
+              <div key={i} className="w-full shrink-0">
+                <img
+                  src={src}
+                  alt={`slide-${i}`}
+                  className="w-full h-auto block"
+                />
+              </div>
+            ))}
           </div>
 
-          {/* Prev / Next buttons (grey circles) */}
+          {/* Prev / Next (inside frame, always visible) */}
           <button
             type="button"
             onClick={prev}
             aria-label="Previous"
-            className="
-              absolute left-[-56px] top-1/2 -translate-y-1/2
-              h-12 w-12 rounded-full
-              bg-[#cfcfcf] border-2 border-white
-              flex items-center justify-center
-              hover:bg-[#bdbdbd]
-            "
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-[999] h-12 w-12 rounded-full bg-[#cfcfcf]/90 flex items-center justify-center hover:bg-[#bdbdbd] select-none"
           >
-            <span className="text-[26px] leading-none">‹</span>
+            <span className="text-[28px] leading-none">‹</span>
           </button>
 
           <button
             type="button"
             onClick={next}
             aria-label="Next"
-            className="
-              absolute right-[-56px] top-1/2 -translate-y-1/2
-              h-12 w-12 rounded-full
-              bg-[#cfcfcf] border-2 border-white
-              flex items-center justify-center
-              hover:bg-[#bdbdbd]
-            "
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-[999] h-12 w-12 rounded-full bg-[#cfcfcf]/90 flex items-center justify-center hover:bg-[#bdbdbd] select-none"
           >
-            <span className="text-[26px] leading-none">›</span>
+            <span className="text-[28px] leading-none">›</span>
           </button>
         </div>
       </div>

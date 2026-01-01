@@ -18,5 +18,8 @@ export const glitchImage =
  * Homepage carousel should be ONLY the 3 big slides.
  * Do NOT include ummLogo here, or it becomes a “slide” and breaks layout.
  */
-export const slides = [comicImage, image22, stuffImage];
-
+export const slides = [
+  comicImage,   // Slide 1
+  stuffImage,   // Slide 3 (swap in)
+  image22,      // Slide 2 (swap in)
+];
