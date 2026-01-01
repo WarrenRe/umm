@@ -1,4 +1,3 @@
-cat > src/App.tsx <<'EOF'
 import { useState } from "react";
 import { Page } from "./types";
 
@@ -62,4 +61,4 @@ export default function App() {
     </div>
   );
 }
-EOF
+

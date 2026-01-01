@@ -1,4 +1,3 @@
-cat > src/pages/HomePage.tsx <<'EOF'
 import { slides } from "../assets/images";
 
 export default function HomePage({
@@ -67,4 +66,4 @@ export default function HomePage({
     </div>
   );
 }
-EOF
+

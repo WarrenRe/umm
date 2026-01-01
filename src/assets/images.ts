@@ -1,4 +1,3 @@
-cat > src/assets/images.ts <<'EOF'
 export const comicImage =
   "https://rawcdn.githack.com/WarrenRe/Model/339fc8a316ec86f8e1ff7ab24be8686943b71737/COMIC%20PAGE%201%20-%20Copy.jpg";
 
@@ -20,4 +19,4 @@ export const glitchImage =
  * Do NOT include ummLogo here, or it becomes a “slide” and breaks layout.
  */
 export const slides = [comicImage, image22, stuffImage];
-EOF
+

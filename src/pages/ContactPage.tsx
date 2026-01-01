@@ -1,4 +1,3 @@
-cat > src/pages/ContactPage.tsx <<'EOF'
 import { ummLogo } from "../assets/images";
 
 export default function ContactPage() {
@@ -44,4 +43,4 @@ export default function ContactPage() {
     </div>
   );
 }
-EOF
+

@@ -1,4 +1,3 @@
-cat > src/components/Header.tsx <<'EOF'
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Page } from "../types";
 
@@ -112,4 +111,4 @@ export default function Header({
     </header>
   );
 }
-EOF
+
