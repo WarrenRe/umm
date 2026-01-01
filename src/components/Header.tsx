@@ -7,6 +7,13 @@ type Props = {
   onHomeReset: () => void;
 };
 
+const LINKS = {
+  Visualizer: "http://urbanmasque.media/",
+  Profiler: "https://warrenre.github.io/dogwatch/",
+  Lens: "https://www.tiktok.com/effect/DedSecMask-2421054",
+  Imagine: "https://www.midjourney.com/@urbz_?tab=spotlight",
+} as const;
+
 export default function Header({
   currentPage,
   setCurrentPage,
@@ -24,68 +31,98 @@ export default function Header({
   }, [open]);
 
   useEffect(() => {
-    const onClick = (e: MouseEvent) => {
-      if (
-        !menuRef.current?.contains(e.target as Node) &&
-        !btnRef.current?.contains(e.target as Node)
-      ) {
-        setOpen(false);
-      }
-    };
-
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
 
-    window.addEventListener("mousedown", onClick);
-    window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("mousedown", onClick);
-      window.removeEventListener("keydown", onKey);
+    const onClick = (e: MouseEvent) => {
+      if (!open) return;
+      const t = e.target as Node;
+
+      if (btnRef.current?.contains(t)) return;
+      if (menuRef.current?.contains(t)) return;
+
+      setOpen(false);
     };
-  }, []);
+
+    window.addEventListener("keydown", onKey);
+    window.addEventListener("mousedown", onClick);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("mousedown", onClick);
+    };
+  }, [open]);
 
   const headerBtn =
-    "px-6 py-4 uppercase tracking-[0.25em] text-[14px] bg-transparent border-0 outline-none";
+    "uppercase tracking-[0.25em] text-[14px] bg-transparent text-black " +
+    "border-0 outline-none p-0";
 
-  const itemBase =
-    "w-full text-left px-5 py-4 uppercase tracking-[0.25em] text-[13px] border-b border-black";
+  const menuItemBase =
+    "w-full text-left px-5 py-4 uppercase tracking-[0.25em] text-[13px] bg-white " +
+    "hover:bg-black hover:text-white";
 
-  const Item = ({ label, page }: { label: string; page: Page }) => (
-    <button
-      type="button"
-      onClick={() => {
-        setCurrentPage(page);
-        setOpen(false);
-      }}
-      className={[
-        itemBase,
-        currentPage === page
-          ? "bg-black text-white"
-          : "bg-white hover:bg-black hover:text-white",
-      ].join(" ")}
-    >
-      {label}
-    </button>
-  );
+  const separator = "border-t border-black";
+
+  const ExternalItem = ({ label, href }: { label: string; href: string }) => {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className={menuItemBase}
+        role="menuitem"
+        onClick={() => setOpen(false)}
+      >
+        {label}
+      </a>
+    );
+  };
+
+  const InternalItem = ({ label, page }: { label: string; page: Page }) => {
+    const active = currentPage === page;
+    return (
+      <button
+        type="button"
+        className={[
+          menuItemBase,
+          active ? "bg-black text-white" : "",
+        ].join(" ")}
+        onClick={() => {
+          setOpen(false);
+          requestAnimationFrame(() => setCurrentPage(page));
+        }}
+        role="menuitem"
+      >
+        {label}
+      </button>
+    );
+  };
 
   return (
-    <header className="relative z-[1000] bg-[#eeeeee]">
+    <header className="relative z-[1000] bg-transparent">
       <div className="flex items-center justify-between px-8 py-6">
         <button
           ref={btnRef}
+          type="button"
           className={headerBtn}
           onClick={() => setOpen((v) => !v)}
+          aria-expanded={open}
+          aria-haspopup="menu"
         >
           MENU
         </button>
 
         <button
+          type="button"
           className={headerBtn}
           onClick={() => {
-            setCurrentPage(Page.Visualizer);
-            onHomeReset();
+            setOpen(false);
+            requestAnimationFrame(() => {
+              setCurrentPage(Page.Visualizer);
+              onHomeReset();
+            });
           }}
+          aria-label="Go home"
         >
           UMM
         </button>
@@ -96,12 +133,18 @@ export default function Header({
           ref={menuRef}
           className="absolute bg-white border border-black min-w-[240px] shadow-[6px_6px_0px_#000]"
           style={{ top: pos.top, left: pos.left }}
+          role="menu"
         >
-          <Item label="Visualizer" page={Page.Visualizer} />
-          <Item label="Profiler" page={Page.Profiler} />
-          <Item label="Lens" page={Page.Lens} />
-          <Item label="Imagine" page={Page.Imagine} />
-          <Item label="Contact" page={Page.Contact} />
+          <ExternalItem label="Visualizer" href={LINKS.Visualizer} />
+          <div className={separator} />
+          <ExternalItem label="Profiler" href={LINKS.Profiler} />
+          <div className={separator} />
+          <ExternalItem label="Lens" href={LINKS.Lens} />
+          <div className={separator} />
+          <ExternalItem label="Imagine" href={LINKS.Imagine} />
+
+          <div className={separator} />
+          <InternalItem label="Contact" page={Page.Contact} />
         </div>
       )}
     </header>
