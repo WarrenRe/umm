@@ -1,3 +1,4 @@
+cat > src/App.tsx <<'EOF'
 import { useState } from "react";
 import { Page } from "./types";
 
@@ -8,17 +9,21 @@ import InitializationScreen from "./components/InitializationScreen";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
+  const [slideIndex, setSlideIndex] = useState(0);
+
   const [isInitializing, setIsInitializing] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
 
   const handleInitializationComplete = () => {
     setIsExiting(true);
-    setTimeout(() => {
-      setIsInitializing(false);
-    }, 600);
+    setTimeout(() => setIsInitializing(false), 600);
   };
 
-  // Boot / terminal screen
+  const goHomeSlide1 = () => {
+    setCurrentPage(Page.Visualizer);
+    setSlideIndex(0);
+  };
+
   if (isInitializing) {
     return (
       <InitializationScreen
@@ -30,25 +35,26 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 animate-fadeIn selection:bg-black selection:text-white">
-      {/* App shell */}
       <div className="bg-[#eeeeee] min-h-screen flex flex-col relative">
-        {/* Header */}
         <Header
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          onLogoClick={goHomeSlide1}
         />
 
-        {/* Main content */}
-        <main className="flex-grow p-4 sm:p-6 md:p-8 pt-10 overflow-hidden">
+        {/* Add a little space between header and content like your refs */}
+        <main className="flex-grow px-5 pb-6 pt-8 overflow-hidden">
           {(currentPage === Page.Visualizer ||
             currentPage === Page.Profiler ||
             currentPage === Page.Lens ||
-            currentPage === Page.Imagine) && <HomePage />}
+            currentPage === Page.Imagine) && (
+            <HomePage idx={slideIndex} setIdx={setSlideIndex} />
+          )}
 
           {currentPage === Page.Contact && <ContactPage />}
         </main>
 
-        {/* Footer (minimal, no border) */}
+        {/* Footer: smaller, no border */}
         <footer className="py-2 text-[9px] uppercase tracking-[0.2em] text-center opacity-50">
           Urban Masque Media • {new Date().getFullYear()} • Connection Established
         </footer>
@@ -56,3 +62,4 @@ export default function App() {
     </div>
   );
 }
+EOF

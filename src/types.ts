@@ -1,5 +1,8 @@
 
 export enum Page {
-  Visualizer = 'Visualizer',
-  ContactMe = 'Contact Me',
+  Visualizer = "Visualizer",
+  Profiler = "Profiler",
+  Lens = "Lens",
+  Imagine = "Imagine",
+  Contact = "Contact",
 }
