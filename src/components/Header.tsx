@@ -4,15 +4,15 @@ import { Page } from "../types";
 export default function Header({
   currentPage,
   setCurrentPage,
-  onLogoClick,
+  onHomeReset,
 }: {
   currentPage: Page;
   setCurrentPage: (p: Page) => void;
-  onLogoClick: () => void;
+  onHomeReset: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
-  const [pos, setPos] = useState({ top: 84, left: 16 });
+  const [pos, setPos] = useState({ top: 64, left: 16 });
 
   useLayoutEffect(() => {
     if (!open) return;
@@ -25,26 +25,37 @@ export default function Header({
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+    const onClick = (e: MouseEvent) => {
+      // close if clicking outside
+      const t = e.target as Node;
+      if (!open) return;
+      if (btnRef.current && btnRef.current.contains(t)) return;
+      setOpen(false);
+    };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  const go = (p: Page) => {
-    setCurrentPage(p);
-    setOpen(false);
-  };
+    window.addEventListener("mousedown", onClick);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("mousedown", onClick);
+    };
+  }, [open]);
 
   const Item = ({ label, page }: { label: string; page: Page }) => {
     const active = currentPage === page;
     return (
       <button
         type="button"
-        onClick={() => go(page)}
-        className={`w-full flex items-center justify-between px-4 py-3 uppercase tracking-[0.22em] text-[11px]
-          ${active ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white"}`}
+        onClick={() => {
+          setCurrentPage(page);
+          setOpen(false);
+        }}
+        className={[
+          "w-full text-left px-4 py-3 uppercase tracking-[0.22em] text-[12px]",
+          "border-b border-black",
+          active ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white",
+        ].join(" ")}
       >
-        <span>{label}</span>
-        <span className="opacity-70 text-[12px]">↗</span>
+        {label}
       </button>
     );
   };
@@ -56,53 +67,46 @@ export default function Header({
           ref={btnRef}
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="flex items-center gap-2 bg-transparent uppercase tracking-[0.22em] text-[11px] opacity-80 hover:opacity-100"
+          className="bg-white px-4 py-2 uppercase tracking-[0.22em] text-[12px] hover:bg-black hover:text-white"
           aria-expanded={open}
           aria-haspopup="menu"
         >
-          <span className="text-[18px] leading-none">☰</span>
-          <span>Menu</span>
+          ☰ Menu
         </button>
 
-        {/* UMM “logo” text top-right; click returns to Homepage slide 1 */}
         <button
           type="button"
           onClick={() => {
+            setCurrentPage(Page.Visualizer);
+            onHomeReset();
             setOpen(false);
-            onLogoClick();
           }}
-          className="font-bold tracking-[0.5em] text-[16px] md:text-[18px]"
-          aria-label="UMM Home"
+          className="font-bold tracking-[0.5em] text-[18px] md:text-[20px]"
+          aria-label="Go to home"
         >
           UMM
         </button>
       </div>
 
-      {/* Thin divider line under header like your refs */}
-      <div className="h-px bg-black opacity-80 mx-5" />
-
       {open && (
         <div
           role="menu"
-          className="fixed z-[999999] w-44 border-2 border-black bg-white shadow-[6px_6px_0px_#000000]"
+          className="fixed z-[999999] w-56 border-2 border-black bg-white shadow-[8px_8px_0px_#000000]"
           style={{ top: pos.top, left: pos.left }}
         >
-          {/* Black bar header like screenshot */}
-          <div className="bg-black text-white px-4 py-3 uppercase tracking-[0.22em] text-[11px]">
-            Home
-          </div>
-
+          <Item label="Home" page={Page.Visualizer} />
           <Item label="Visualizer" page={Page.Visualizer} />
           <Item label="Profiler" page={Page.Profiler} />
           <Item label="Lens" page={Page.Lens} />
           <Item label="Imagine" page={Page.Imagine} />
-
-          <div className="h-px bg-black opacity-80" />
+          <div className="border-b border-black" />
           <button
             type="button"
-            onClick={() => go(Page.Contact)}
-            className={`w-full text-left px-4 py-3 uppercase tracking-[0.22em] text-[11px]
-              ${currentPage === Page.Contact ? "bg-black text-white" : "bg-white hover:bg-black hover:text-white"}`}
+            onClick={() => {
+              setCurrentPage(Page.Contact);
+              setOpen(false);
+            }}
+            className="w-full text-left px-4 py-3 uppercase tracking-[0.22em] text-[12px] bg-white hover:bg-black hover:text-white"
           >
             Contact
           </button>
@@ -111,4 +115,3 @@ export default function Header({
     </header>
   );
 }
-

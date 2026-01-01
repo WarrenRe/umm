@@ -13,6 +13,8 @@ export default function App() {
   const [isInitializing, setIsInitializing] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
 
+  const [homeResetKey, setHomeResetKey] = useState(0);
+
   const handleInitializationComplete = () => {
     setIsExiting(true);
     setTimeout(() => setIsInitializing(false), 600);
@@ -36,22 +38,21 @@ export default function App() {
     <div className="min-h-screen bg-white text-gray-900 animate-fadeIn selection:bg-black selection:text-white">
       <div className="bg-[#eeeeee] min-h-screen flex flex-col relative">
         <Header
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          onLogoClick={goHomeSlide1}
-        />
+  currentPage={currentPage}
+  setCurrentPage={setCurrentPage}
+  onHomeReset={() => setHomeResetKey((k) => k + 1)}
+/>
 
-        {/* Add a little space between header and content like your refs */}
-        <main className="flex-grow px-5 pb-6 pt-8 overflow-hidden">
-          {(currentPage === Page.Visualizer ||
-            currentPage === Page.Profiler ||
-            currentPage === Page.Lens ||
-            currentPage === Page.Imagine) && (
-            <HomePage idx={slideIndex} setIdx={setSlideIndex} />
-          )}
+<main className="flex-grow p-4 sm:p-6 md:p-8 pt-10">
+  {currentPage === Page.Visualizer ? (
+    <HomePage resetKey={homeResetKey} />
+  ) : currentPage === Page.Contact ? (
+    <ContactPage />
+  ) : (
+    <HomePage resetKey={homeResetKey} />
+  )}
+</main>
 
-          {currentPage === Page.Contact && <ContactPage />}
-        </main>
 
         {/* Footer: smaller, no border */}
         <footer className="py-2 text-[9px] uppercase tracking-[0.2em] text-center opacity-50">
