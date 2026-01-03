@@ -1,64 +1,50 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Page } from "./types";
 
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import ContactPage from "./pages/ContactPage";
-import InitializationScreen from "./components/InitializationScreen";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
-  const [homeResetKey, setHomeResetKey] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  const [isInitializing, setIsInitializing] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
-
-  const handleInitializationComplete = () => {
-    setIsExiting(true);
-    setTimeout(() => setIsInitializing(false), 600);
-  };
-
-  const onHomeReset = () => {
-    setHomeResetKey((k) => k + 1);
+  const goHomeSlide1 = () => {
     setCurrentPage(Page.Visualizer);
+    setSlideIndex(0);
   };
-
-  if (isInitializing) {
-    return (
-      <InitializationScreen
-        onComplete={handleInitializationComplete}
-        isExiting={isExiting}
-      />
-    );
-  }
 
   return (
-    // OUTSIDE THE BOX: pure white
-    <div className="min-h-screen bg-white text-black flex justify-center p-6 md:p-10">
-      {/* BOX */}
-      <div className="w-full max-w-6xl">
-        <div className="bg-[#eeeeee] border-2 border-black shadow-[10px_10px_0px_#000000] min-h-[calc(100vh-3rem)] flex flex-col">
-          {/* Header inside the box */}
-          <Header
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            onHomeReset={onHomeReset}
-          />
+    // STAGE: center the poster within the white page
+    <div className="min-h-screen bg-white px-6 sm:px-8 lg:px-12 py-12 flex items-center justify-center">
+      {/* POSTER */}
+      <div
+        className="
+          w-[92%] sm:w-[90%] md:w-[85%] lg:w-[80%]
+          max-w-6xl
+          bg-[#eeeeee]
+          border-2 border-black
+          shadow-[10px_10px_0px_#000000]
+          flex flex-col
+          pt-14 px-6 pb-12
+        "
+      >
+        <Header
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          goHomeSlide1={goHomeSlide1}
+        />
 
-          {/* Main inside the box */}
-          <main className="flex-grow px-6 md:px-10 py-6 md:py-8 bg-[#eeeeee]">
-            {currentPage === Page.Contact ? (
-              <ContactPage />
-            ) : (
-              <HomePage resetKey={homeResetKey} />
-            )}
-          </main>
+        <main className="flex-1 min-h-0 px-[15px] mt-6 mb-10">
+          {currentPage === Page.Visualizer && (
+            <HomePage slideIndex={slideIndex} setSlideIndex={setSlideIndex} />
+          )}
+          {currentPage === Page.Contact && <ContactPage />}
+        </main>
 
-          {/* Footer inside the box */}
-          <footer className="bg-[#eeeeee] py-3 text-[9px] uppercase tracking-[0.2em] text-center opacity-60">
-            Urban Masque Media • {new Date().getFullYear()} • Connection Established
-          </footer>
-        </div>
+        <footer className="bg-[#eeeeee] border-0 shadow-none h-10 flex items-center justify-center text-xs text-black/60">
+          URBAN MASQUE MEDIA • 2026 • CONNECTION ESTABLISHED
+        </footer>
       </div>
     </div>
   );

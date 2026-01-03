@@ -5,7 +5,7 @@ export const ummLogo =
   "https://rawcdn.githack.com/WarrenRe/Model/339fc8a316ec86f8e1ff7ab24be8686943b71737/umm.png";
 
 export const stuffImage =
-  "https://rawcdn.githack.com/WarrenRe/Model/5fae801fa9512e42aa935224cd9bab77b169e352/stuff.jpg";
+  "https://rawcdn.githack.com/WarrenRe/Model/cdb6fafb4d0e523c8eebc75a7f77c3168de6c8dd/stuff3.jpg";
 
 export const image22 =
   "https://rawcdn.githack.com/WarrenRe/Model/5fae801fa9512e42aa935224cd9bab77b169e352/image22.png";

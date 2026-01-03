@@ -48,21 +48,30 @@ export default function HomePage({ resetKey = 0 }: Props) {
     );
   }
 
-  // DESKTOP/TABLET: centered stage
-  // Adjust this number if needed; it accounts for header + footer + app padding.
-  const stageHeight = "calc(100vh - 240px)";
-
+  /**
+   * DESKTOP/TABLET:
+   * - No 100vh. This allows App.tsx spacing to actually work.
+   * - Stage uses available space inside <main> (which is flex-1).
+   * - Centering remains identical.
+   */
   return (
-    <div className="w-full">
-      <div className="px-[100px]">
-        <div className="relative">
-          <div className="w-full flex items-center justify-center" style={{ height: stageHeight }}>
-            <img
-              src={items[idx]}
-              alt={`slide-${idx + 1}`}
-              className="block max-w-full"
-              style={{ maxHeight: "100%", objectFit: "contain" }}
-            />
+    <div className="w-full h-full">
+      <div className="px-[100px] h-full">
+        <div className="relative h-full">
+          {/* Stage fills available height of the poster's main area */}
+          <div className="w-full h-full flex items-center justify-center">
+<img
+  src={items[idx]}
+  alt={`slide-${idx + 1}`}
+  className="block max-w-full"
+  style={{
+    maxHeight: "100%",
+    objectFit: "contain",
+    transform: "scale(0.85)",
+    transformOrigin: "center",
+  }}
+/>
+
           </div>
 
           <button

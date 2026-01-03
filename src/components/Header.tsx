@@ -4,7 +4,7 @@ import { Page } from "../types";
 type Props = {
   currentPage: Page;
   setCurrentPage: (p: Page) => void;
-  onHomeReset: () => void;
+  goHomeSlide1: () => void;
 };
 
 const LINKS = {
@@ -14,7 +14,7 @@ const LINKS = {
   Imagine: "https://www.midjourney.com/@urbz_?tab=spotlight",
 } as const;
 
-export default function Header({ currentPage, setCurrentPage, onHomeReset }: Props) {
+export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Props) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -50,7 +50,7 @@ export default function Header({ currentPage, setCurrentPage, onHomeReset }: Pro
   }, [open]);
 
   const headerBtn =
-    "uppercase tracking-[0.25em] text-[14px] md:text-[16px] bg-transparent text-black " +
+    "uppercase tracking-[0.25em] text-[16px] md:text-[18px] bg-transparent text-black " +
     "border-0 outline-none p-0 hover:opacity-70";
 
   const menuItem =
@@ -83,7 +83,6 @@ export default function Header({ currentPage, setCurrentPage, onHomeReset }: Pro
         role="menuitem"
         className={active ? activeMenuItem : menuItem}
         onClick={() => {
-          // close menu, then route (prevents "close only" behavior)
           setOpen(false);
           requestAnimationFrame(() => setCurrentPage(page));
         }}
@@ -94,8 +93,8 @@ export default function Header({ currentPage, setCurrentPage, onHomeReset }: Pro
   };
 
   return (
-    <header className="relative z-[1000] bg-[#eeeeee]">
-      <div className="flex items-center justify-between px-8 py-6">
+    <header className="relative z-[1000] bg-transparent font-['Syne_Mono']">
+      <div className="flex items-center justify-between">
         <button
           ref={btnRef}
           type="button"
@@ -112,7 +111,7 @@ export default function Header({ currentPage, setCurrentPage, onHomeReset }: Pro
           className={headerBtn}
           onClick={() => {
             setOpen(false);
-            requestAnimationFrame(() => onHomeReset());
+            requestAnimationFrame(() => goHomeSlide1());
           }}
           aria-label="Go to homepage slide 1"
         >
