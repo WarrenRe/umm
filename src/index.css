@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global page behavior */
 html,
 body {
   height: auto;
@@ -11,14 +10,18 @@ body {
   padding: 0;
   overflow-y: auto;
   background: #ffffff;
+
+  /* Force Syne Mono globally */
+  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* Apply Syne Mono globally */
-body {
-  font-family: "Syne Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+/* Safety net: even if preflight is weird, links won't go blue/underlined */
+a {
+  color: inherit;
+  text-decoration: none;
 }

@@ -51,14 +51,16 @@ export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Pr
 
   const headerBtn =
     "uppercase tracking-[0.25em] text-[16px] md:text-[18px] bg-transparent text-black " +
-    "border-0 outline-none p-0 hover:opacity-70";
+    "border-0 outline-none p-0 hover:opacity-70 font-['Syne_Mono']";
 
-  const menuItem =
-    "w-full text-left px-5 py-3 uppercase tracking-[0.25em] text-[12px] bg-[#eeeeee] " +
-    "text-black hover:bg-black hover:text-white";
+  const menuItemBase =
+    "w-full text-left px-5 py-3 uppercase tracking-[0.25em] text-[12px] " +
+    "bg-[#eeeeee] text-black hover:bg-black hover:text-white " +
+    "no-underline border-0 outline-none appearance-none font-['Syne_Mono']";
 
   const activeMenuItem =
-    "w-full text-left px-5 py-3 uppercase tracking-[0.25em] text-[12px] bg-black text-white";
+    "w-full text-left px-5 py-3 uppercase tracking-[0.25em] text-[12px] " +
+    "bg-black text-white no-underline border-0 outline-none appearance-none font-['Syne_Mono']";
 
   const sep = "border-t border-black";
 
@@ -67,7 +69,7 @@ export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Pr
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={menuItem}
+      className={menuItemBase}
       role="menuitem"
       onClick={() => setOpen(false)}
     >
@@ -81,7 +83,7 @@ export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Pr
       <button
         type="button"
         role="menuitem"
-        className={active ? activeMenuItem : menuItem}
+        className={active ? activeMenuItem : menuItemBase}
         onClick={() => {
           setOpen(false);
           requestAnimationFrame(() => setCurrentPage(page));
@@ -93,7 +95,7 @@ export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Pr
   };
 
   return (
-    <header className="relative z-[1000] bg-transparent font-['Syne_Mono']">
+    <header className="relative z-[1000] bg-transparent">
       <div className="flex items-center justify-between">
         <button
           ref={btnRef}
