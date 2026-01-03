@@ -18,12 +18,44 @@ export default function Header({ currentPage, setCurrentPage, onGoHome }: Props)
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
+
+  // viewport coords for fixed-position dropdown
   const [pos, setPos] = useState({ top: 0, left: 0 });
 
+  const updatePos = () => {
+    const btn = btnRef.current;
+    if (!btn) return;
+    const r = btn.getBoundingClientRect();
+    setPos({
+      top: r.bottom + 10,
+      left: r.left,
+    });
+  };
+
   useLayoutEffect(() => {
-    if (!open || !btnRef.current) return;
-    const r = btnRef.current.getBoundingClientRect();
-    setPos({ top: r.bottom + 10, left: r.left });
+    if (!open) return;
+    updatePos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    let raf = 0;
+    const onMove = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(updatePos);
+    };
+
+    window.addEventListener("scroll", onMove, { passive: true });
+    window.addEventListener("resize", onMove);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onMove);
+      window.removeEventListener("resize", onMove);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   useEffect(() => {
@@ -124,7 +156,8 @@ export default function Header({ currentPage, setCurrentPage, onGoHome }: Props)
       {open && (
         <div
           ref={menuRef}
-          className="absolute z-[2000] min-w-[240px] border-2 border-black bg-[#eeeeee] shadow-[8px_8px_0px_#000000]"
+          // FIX: fixed positioning so rect coords map correctly
+          className="fixed z-[9999] min-w-[240px] border-2 border-black bg-[#eeeeee] shadow-[8px_8px_0px_#000000]"
           style={{ top: pos.top, left: pos.left }}
           role="menu"
         >
