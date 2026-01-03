@@ -4,7 +4,7 @@ import { Page } from "../types";
 type Props = {
   currentPage: Page;
   setCurrentPage: (p: Page) => void;
-  goHomeSlide1: () => void;
+  onGoHome: () => void;
 };
 
 const LINKS = {
@@ -14,7 +14,7 @@ const LINKS = {
   Imagine: "https://www.midjourney.com/@urbz_?tab=spotlight",
 } as const;
 
-export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Props) {
+export default function Header({ currentPage, setCurrentPage, onGoHome }: Props) {
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const menuRef = useRef<HTMLDivElement | null>(null);
@@ -113,7 +113,7 @@ export default function Header({ currentPage, setCurrentPage, goHomeSlide1 }: Pr
           className={headerBtn}
           onClick={() => {
             setOpen(false);
-            requestAnimationFrame(() => goHomeSlide1());
+            requestAnimationFrame(() => onGoHome());
           }}
           aria-label="Go to homepage slide 1"
         >
