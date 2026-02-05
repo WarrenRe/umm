@@ -5,20 +5,40 @@ import HomePage from './pages/HomePage';
 import ContactPage from './pages/ContactPage';
 import InitializationScreen from './components/InitializationScreen';
 
-function App() {
+const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
+<<<<<<< HEAD
   const [isInitializing, setIsInitializing] = useState(true);
   const [isExiting, setIsExiting] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+=======
+  const [isInitializing, setIsInitializing] = useState<boolean>(true);
+  const [isExiting, setIsExiting] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+>>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
 
-  const handleInitializationComplete = () => {
+  const handleInitializationComplete = (): void => {
     setIsExiting(true);
     setTimeout(() => {
       setIsInitializing(false);
     }, 600);
   };
 
+<<<<<<< HEAD
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
+=======
+  const toggleMenu = (): void => {
+    setIsMenuOpen((prev: boolean) => !prev);
+  };
+
+  const handlePageChange = (page: Page): void => {
+    setCurrentPage(page);
+  };
+
+  const handleMenuStateChange = (open: boolean): void => {
+    setIsMenuOpen(open);
+  };
+>>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
 
   if (isInitializing) {
     return <InitializationScreen onComplete={handleInitializationComplete} isExiting={isExiting} />;
@@ -32,9 +52,15 @@ function App() {
         <div className="absolute top-0 left-0 right-0 z-50">
           <Header 
             currentPage={currentPage} 
+<<<<<<< HEAD
             setCurrentPage={setCurrentPage} 
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}
+=======
+            setCurrentPage={handlePageChange} 
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={handleMenuStateChange}
+>>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
           />
         </div>
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import path from 'path';
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -21,3 +22,15 @@ export default defineConfig(({ mode }) => {
       }
     };
 });
+=======
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  base: './',
+  build: {
+    outDir: 'dist',
+  }
+});
+>>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)

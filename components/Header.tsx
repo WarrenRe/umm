@@ -25,6 +25,7 @@ const menuItems: MenuItem[] = [
   { name: 'Contact', type: 'internal', page: Page.ContactMe },
 ];
 
+<<<<<<< HEAD
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, isMenuOpen, setIsMenuOpen }) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -40,9 +41,33 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, isMenuOpen
         document.exitFullscreen();
       }
     }
+=======
+const Header: React.FC<HeaderProps> = ({ 
+  currentPage, 
+  setCurrentPage, 
+  isMenuOpen, 
+  setIsMenuOpen 
+}) => {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const toggleMenu = (): void => {
+    setIsMenuOpen(!isMenuOpen);
+>>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
   };
 
-  const handleItemClick = (item: MenuItem) => {
+  const toggleFullscreen = (): void => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((e: any) => {
+        console.error(`Error attempting to enable full-screen mode: ${e.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
+
+  const handleItemClick = (item: MenuItem): void => {
     if (item.type === 'internal' && item.page) {
       setCurrentPage(item.page);
     } else if (item.type === 'external' && item.url) {
@@ -52,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, isMenuOpen
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event: MouseEvent): void => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsMenuOpen(false);
       }
@@ -75,7 +100,11 @@ const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, isMenuOpen
 
         {isMenuOpen && (
           <div className="absolute top-full left-0 mt-3 w-48 bg-[#eeeeee] border-2 border-black shadow-[6px_6px_0px_#000000] z-50 overflow-hidden">
+<<<<<<< HEAD
             {menuItems.map((item) => (
+=======
+            {menuItems.map((item: MenuItem) => (
+>>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
               <button
                 key={item.name}
                 onClick={() => handleItemClick(item)}
