@@ -25,34 +25,11 @@ const menuItems: MenuItem[] = [
   { name: 'Contact', type: 'internal', page: Page.ContactMe },
 ];
 
-<<<<<<< HEAD
 const Header: React.FC<HeaderProps> = ({ currentPage, setCurrentPage, isMenuOpen, setIsMenuOpen }) => {
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(e => {
-        console.error(`Error attempting to enable full-screen mode: ${e.message}`);
-      });
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    }
-=======
-const Header: React.FC<HeaderProps> = ({ 
-  currentPage, 
-  setCurrentPage, 
-  isMenuOpen, 
-  setIsMenuOpen 
-}) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
->>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
   };
 
   const toggleFullscreen = (): void => {
@@ -98,14 +75,10 @@ const Header: React.FC<HeaderProps> = ({
           </svg>
         </button>
 
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 mt-3 w-48 bg-[#eeeeee] border-2 border-black shadow-[6px_6px_0px_#000000] z-50 overflow-hidden">
-<<<<<<< HEAD
-            {menuItems.map((item) => (
-=======
-            {menuItems.map((item: MenuItem) => (
->>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
-              <button
+{isMenuOpen && (
+  <div className="absolute top-full left-0 mt-3 w-48 bg-[#eeeeee] border-2 border-black shadow-[6px_6px_0px_#000000] z-50 overflow-hidden">
+    {menuItems.map((item: MenuItem) => (
+      <button
                 key={item.name}
                 onClick={() => handleItemClick(item)}
                 className={`block w-full text-left px-5 py-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-all border-b border-black last:border-b-0 ${

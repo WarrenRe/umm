@@ -7,15 +7,9 @@ import InitializationScreen from './components/InitializationScreen';
 
 const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<Page>(Page.Visualizer);
-<<<<<<< HEAD
-  const [isInitializing, setIsInitializing] = useState(true);
-  const [isExiting, setIsExiting] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-=======
   const [isInitializing, setIsInitializing] = useState<boolean>(true);
   const [isExiting, setIsExiting] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
->>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
 
   const handleInitializationComplete = (): void => {
     setIsExiting(true);
@@ -24,9 +18,6 @@ const App: React.FC = () => {
     }, 600);
   };
 
-<<<<<<< HEAD
-  const toggleMenu = () => setIsMenuOpen(prev => !prev);
-=======
   const toggleMenu = (): void => {
     setIsMenuOpen((prev: boolean) => !prev);
   };
@@ -38,7 +29,6 @@ const App: React.FC = () => {
   const handleMenuStateChange = (open: boolean): void => {
     setIsMenuOpen(open);
   };
->>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
 
   if (isInitializing) {
     return <InitializationScreen onComplete={handleInitializationComplete} isExiting={isExiting} />;
@@ -48,21 +38,15 @@ const App: React.FC = () => {
     <div className="h-screen w-screen text-gray-900 animate-fadeIn bg-white selection:bg-black selection:text-white flex flex-col overflow-hidden">
       <div className="relative flex-grow flex flex-col overflow-hidden">
         
-        {/* Absolute Header Overlay */}
-        <div className="absolute top-0 left-0 right-0 z-50">
-          <Header 
-            currentPage={currentPage} 
-<<<<<<< HEAD
-            setCurrentPage={setCurrentPage} 
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={setIsMenuOpen}
-=======
-            setCurrentPage={handlePageChange} 
-            isMenuOpen={isMenuOpen}
-            setIsMenuOpen={handleMenuStateChange}
->>>>>>> a2353b0 (Fix: Remove Conflicting importmap and harden TS definitions)
-          />
-        </div>
+{/* Absolute Header Overlay */}
+<div className="absolute top-0 left-0 right-0 z-50">
+  <Header 
+    currentPage={currentPage} 
+    setCurrentPage={handlePageChange} 
+    isMenuOpen={isMenuOpen}
+    setIsMenuOpen={handleMenuStateChange}
+  />
+</div>
 
         <main className="flex-grow flex items-center justify-center overflow-hidden bg-[#eeeeee]">
           {currentPage === Page.Visualizer ? (
